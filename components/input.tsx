@@ -4,15 +4,15 @@ import { useState } from "react";
 
 interface InputProps {
   name: string;
-  errors?: Record<string, string[]>;
+  errors?: string[];
 }
 
 export default function Input({
   name,
-  errors = {},
+  errors = [],
   ...rest
 }: InputProps & InputHTMLAttributes<HTMLInputElement>) {
-  const hasError = !!errors[name];
+  const hasError = Boolean(errors.length);
   const [focused, setFocused] = useState(false);
 
   const borderColor = hasError ? "border-rose-400" : "border-neutral-200";
@@ -56,7 +56,7 @@ export default function Input({
       </div>
 
       {hasError &&
-        errors[name]?.map((error, index) => (
+        errors.map((error, index) => (
           <p
             key={index}
             id={`${name}-error`}

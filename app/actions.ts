@@ -43,6 +43,13 @@ export async function loginForm(prevState: ActionState, formData: FormData) {
   } else {
     return {
       success: true,
+      error: {
+        fieldErrors: {
+          email: [],
+          username: [],
+          password: [],
+        },
+      },
     };
   }
 }

@@ -9,11 +9,18 @@ import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 const initialState = {
   success: false,
-  error: {},
+  error: {
+    fieldErrors: {
+      email: [],
+      username: [],
+      password: [],
+    },
+  },
 };
 
 export default function Home() {
   const [state, dispatch] = useFormState(loginForm, initialState);
+  console.log("state:", state);
   return (
     <div className="flex flex-col items-center justify-center gap-10 min-h-screen *:w-full ">
       <FireIcon className="size-14 text-rose-400" />
@@ -23,21 +30,21 @@ export default function Home() {
           placeholder="Email"
           required={true}
           name="email"
-          errors={state?.error?.fieldErrors}
+          errors={state.error?.fieldErrors?.email}
         />
         <Input
           type="text"
           placeholder="Username"
           required={true}
           name="username"
-          errors={state?.error?.fieldErrors}
+          errors={state.error?.fieldErrors?.password}
         />
         <Input
           type="password"
           placeholder="Password"
           required
           name="password"
-          errors={state?.error?.fieldErrors}
+          errors={state.error?.fieldErrors?.username}
         />
         <Button text="Log In" />
       </form>
