@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .primary-btn {
+    @apply w-full text-center bg-neutral-100 rounded-full  text-neutral-500 font-semibold my-2;
+  }
+}

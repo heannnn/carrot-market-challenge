@@ -2,17 +2,14 @@ import { PrismaClient } from "@prisma/client";
 
 const db = new PrismaClient();
 
-async function test() {
-  const users = await db.user.create({
-    data: {
-      username: "heann",
-      email: "heann@nomadcoder.co.kr",
-    },
-  });
+// async function test() {
+//   await db.user.delete({
+//     where: {
+//       email: "jse033101@zod.com",
+//     },
+//   });
+// }
 
-  console.log(users);
-}
-
-test();
+// test();
 
 export default db;

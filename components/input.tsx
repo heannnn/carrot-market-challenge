@@ -19,7 +19,7 @@ export default function Input({
   const ringColor = hasError ? "ring-rose-300" : "ring-neutral-400";
 
   const Icon =
-    name === "password"
+    name === "password" || name === "confirm_password"
       ? KeyIcon
       : name === "email"
       ? EnvelopeIcon

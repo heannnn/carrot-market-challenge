@@ -1,59 +1,28 @@
-"use client";
-
-import Input from "@/components/input";
-import { useFormState } from "react-dom";
-import { loginForm } from "./actions";
 import Button from "@/components/button";
 import { FireIcon } from "@heroicons/react/16/solid";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
-
-const initialState = {
-  success: false,
-  error: {
-    fieldErrors: {
-      email: [],
-      username: [],
-      password: [],
-    },
-  },
-};
+import Link from "next/link";
+import { redirect } from "next/navigation";
+//import "../lib/db";
 
 export default function Home() {
-  const [state, dispatch] = useFormState(loginForm, initialState);
-  console.log("state:", state);
   return (
-    <div className="flex flex-col items-center justify-center gap-10 min-h-screen *:w-full ">
-      <FireIcon className="size-14 text-rose-400" />
-      <form action={dispatch} className="flex flex-col *:py-5">
-        <Input
-          type="email"
-          placeholder="Email"
-          required={true}
-          name="email"
-          errors={state.error?.fieldErrors?.email}
-        />
-        <Input
-          type="text"
-          placeholder="Username"
-          required={true}
-          name="username"
-          errors={state.error?.fieldErrors?.password}
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          required
-          name="password"
-          errors={state.error?.fieldErrors?.username}
-        />
-        <Button text="Log In" />
-      </form>
-      {state?.success ? (
-        <div className="bg-green-600 flex items-center px-2 gap-3 h-14 rounded-2xl ring-4 ring-green-400">
-          <CheckCircleIcon className="size-6" />
-          <span>Welcome back!</span>
+    <div className="flex flex-col items-center justify-center gap-10 min-h-screen">
+      <div className="flex justify-center items-center gap-3">
+        <FireIcon className="size-14 text-rose-400" />
+        <span className="text-center font-extrabold text-4xl">Welcome</span>
+        <FireIcon className="size-14 text-rose-400" />
+      </div>
+      <div className="flex flex-col items-center gap-3 w-full">
+        <Link className="primary-btn py-2.5 text-lg" href="/create-account">
+          시작하기
+        </Link>
+        <div className="flex gap-2">
+          <span>이미 계정이 있나요?</span>
+          <Link href="/log-in" className="hover:underline">
+            로그인
+          </Link>
         </div>
-      ) : null}
+      </div>
     </div>
   );
 }
