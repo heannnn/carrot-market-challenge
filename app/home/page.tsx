@@ -1,10 +1,8 @@
-import Button from "@/components/button";
 import { FireIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-//import "../lib/db";
+//import "@/lib/db";
 
-export default function Home() {
+export default function Page() {
   return (
     <div className="flex flex-col items-center justify-center gap-10 min-h-screen">
       <div className="flex justify-center items-center gap-3">

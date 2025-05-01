@@ -6,23 +6,22 @@ interface iPublicOnlyUrl {
 }
 
 const publicOnlyUrls: iPublicOnlyUrl = {
-  "/": true,
+  "/home": true,
   "/create-account": true,
   "/log-in": true,
 };
 
 export async function middleware(request: NextRequest) {
-  console.log("request : " + request.nextUrl.pathname);
   const session = await getSession();
   const exists = publicOnlyUrls[request.nextUrl.pathname];
 
-  if (!session.id) {
-    if (!exists) {
+  if (session.id) {
+    if (exists) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   } else {
-    if (exists) {
-      return NextResponse.redirect(new URL("/profile", request.url));
+    if (!exists) {
+      return NextResponse.redirect(new URL("/home", request.url));
     }
   }
 }
