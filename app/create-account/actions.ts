@@ -37,9 +37,10 @@ const formSchema = z
       )
       .regex(PASSWORD_REGEX, PASSWORD_REGEX_ERROR),
   })
-  .superRefine(async ({ username }, ctx) => {
+  .superRefine(async ({ username, email }, ctx) => {
     const user = await db.user.findUnique({
       where: {
+        email,
         username,
       },
       select: {

@@ -8,6 +8,14 @@ export async function getTweets(page: number) {
       id: true,
       tweet: true,
       created_at: true,
+      user: {
+        select: {
+          id: true,
+          username: true,
+          email: true,
+          bio: true,
+        },
+      },
     },
     take: 3,
     skip: page * 3,

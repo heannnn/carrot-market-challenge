@@ -20,6 +20,10 @@ export async function middleware(request: NextRequest) {
     if (exists) {
       return NextResponse.redirect(new URL("/", request.url));
     }
+  } else {
+    if (!exists) {
+      return NextResponse.redirect(new URL("/home", request.url));
+    }
   }
 }
 

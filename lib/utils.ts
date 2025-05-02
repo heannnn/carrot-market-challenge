@@ -2,6 +2,25 @@ export function formatToWon(price: number): string {
   return price.toLocaleString("ko-KR");
 }
 
+export function formatTweetDate(date: Date): string {
+  const timeFormatter = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+
+  const dateFormatter = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  const time = timeFormatter.format(date);
+  const datePart = dateFormatter.format(date);
+
+  return `${time} · ${datePart}`;
+}
+
 export function formatToTimeAgo(date: string): string {
   const now = new Date().getTime();
   const time = new Date(date).getTime();

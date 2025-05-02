@@ -19,6 +19,7 @@ export default function TweetList({ initialTweets, pages }: TweetsListProps) {
     const tweets = await getTweets(page);
     setTweets(tweets);
   };
+
   return (
     <div>
       <div className="flex flex-col gap-5 border-black">

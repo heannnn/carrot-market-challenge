@@ -1,3 +1,5 @@
+"use client";
+
 import { EnvelopeIcon, KeyIcon, UserIcon } from "@heroicons/react/16/solid";
 import { InputHTMLAttributes } from "react";
 import { useState } from "react";
