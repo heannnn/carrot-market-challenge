@@ -1,8 +1,6 @@
 export const dynamic = "force-dynamic";
 
-import Button from "@/components/button";
 import { LikeButton } from "@/components/like-button";
-import RefreshOnMount from "@/components/refresh-on-mount";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { formatTweetDate } from "@/lib/utils";
