@@ -1,5 +1,6 @@
 "use server";
 
+import { TWEET_PER_PAGE } from "@/lib/constants";
 import db from "@/lib/db";
 
 export async function getTweets(page: number) {
@@ -17,8 +18,8 @@ export async function getTweets(page: number) {
         },
       },
     },
-    take: 3,
-    skip: page * 3,
+    take: TWEET_PER_PAGE,
+    skip: page * TWEET_PER_PAGE,
     orderBy: {
       created_at: "desc",
     },

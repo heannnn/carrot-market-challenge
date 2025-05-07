@@ -20,7 +20,6 @@ const initialState = {
 
 export default function CreateAccount() {
   const [state, dispatch] = useFormState(createAccountForm, null);
-  console.log("state:", state);
   return (
     <div className="flex flex-col items-center justify-center gap-10 min-h-screen *:w-full ">
       <FireIcon className="size-14 text-rose-400" />

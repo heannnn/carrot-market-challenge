@@ -12,7 +12,6 @@ const publicOnlyUrls: iPublicOnlyUrl = {
 };
 
 export async function middleware(request: NextRequest) {
-  console.log("request : " + request.nextUrl.pathname);
   const session = await getSession();
   const exists = publicOnlyUrls[request.nextUrl.pathname];
 

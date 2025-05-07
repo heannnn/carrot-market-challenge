@@ -1,4 +1,5 @@
-import Button from "@/components/button";
+export const dynamic = "force-dynamic";
+
 import { LikeButton } from "@/components/like-button";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
@@ -51,45 +52,47 @@ export default async function Tweet({ params }: { params: { id: string } }) {
     return notFound();
   }
 
-  const isLike = await getIsLike(id, tweet.userId);
   const session = await getSession();
   const userId = session.id!;
+  const isLike = await getIsLike(id, userId);
 
   return (
-    <div className="max-w-xl m-10 px-4 py-6 border border-neutral-200">
-      <div className="mb-2">
-        <div className="text-lg font-semibold">@{tweet.user.username}</div>
-        {tweet.user.bio && (
-          <div className="text-sm text-neutral-500">{tweet.user.bio}</div>
-        )}
-      </div>
-      <div className="text-xl mb-4 whitespace-pre-wrap">{tweet.tweet}</div>
-      <div className="text-sm text-neutral-500 border-t border-neutral-200 py-4 space-y-3">
-        <div>{formatTweetDate(tweet.updated_at)}</div>
-      </div>
-      <div className="flex justify-between items-center text-sm text-neutral-500 border-t border-neutral-200 py-4 space-y-3">
-        <div className="flex items-center gap-1 text-black cursor-pointer">
-          <button type="button">
-            <ChatBubbleOvalLeftIcon className="size-5 text-neutral-400" />
-          </button>
-          <span className="text-sm text-neutral-400">0</span>
+    <>
+      <div className="max-w-xl m-10 px-4 py-6 border border-neutral-200">
+        <div className="mb-2">
+          <div className="text-lg font-semibold">@{tweet.user.username}</div>
+          {tweet.user.bio && (
+            <div className="text-sm text-neutral-500">{tweet.user.bio}</div>
+          )}
         </div>
-        <LikeButton
-          tweetId={id}
-          userId={userId}
-          isLiked={isLike}
-          likeCount={tweet._count.likes}
-        />
+        <div className="text-xl mb-4 whitespace-pre-wrap">{tweet.tweet}</div>
+        <div className="text-sm text-neutral-500 border-t border-neutral-200 py-4 space-y-3">
+          <div>{formatTweetDate(tweet.updated_at)}</div>
+        </div>
+        <div className="flex justify-between items-center text-sm text-neutral-500 border-t border-neutral-200 py-4 space-y-3">
+          <div className="flex items-center gap-1 text-black cursor-pointer">
+            <button type="button">
+              <ChatBubbleOvalLeftIcon className="size-5 text-neutral-400" />
+            </button>
+            <span className="text-sm text-neutral-400">0</span>
+          </div>
+          <LikeButton
+            tweetId={id}
+            userId={userId}
+            isLiked={isLike}
+            likeCount={tweet._count.likes}
+          />
+        </div>
+        <div className="flex w-full justify-between border-t border-neutral-200 pt-4 space-y-3">
+          <input
+            className="text-sm w-full text-neutral-500 outline-none placeholder:text-neutral-500"
+            placeholder="Post your reply"
+          />
+          <button className="bg-rose-400 text-white rounded-md px-3 py-1">
+            Reply
+          </button>
+        </div>
       </div>
-      <div className="flex w-full justify-between border-t border-neutral-200 pt-4 space-y-3">
-        <input
-          className="text-sm w-full text-neutral-500 outline-none placeholder:text-neutral-500"
-          placeholder="Post your reply"
-        />
-        <button className="bg-rose-400 text-white rounded-md px-3 py-1">
-          Reply
-        </button>
-      </div>
-    </div>
+    </>
   );
 }

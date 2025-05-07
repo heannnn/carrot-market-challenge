@@ -68,7 +68,6 @@ export async function loginForm(prevState: ActionState, formData: FormData) {
       },
     });
 
-    console.log("user!.password :" + user!.password);
     const ok = await bcrypt.compare(
       result.data.password,
       user!.password ?? "xxxx"

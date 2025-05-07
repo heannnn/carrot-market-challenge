@@ -22,17 +22,15 @@ export function LikeButton({
   const [count, setCount] = useState(initialCount);
   const [isPending, startTransition] = useTransition();
 
-  const onClick = () => {
-    startTransition(async () => {
-      await toggleLike({ tweetId, userId, isLiked });
-      setIsLiked((prev) => !prev);
-      setCount((prev) => prev + (isLiked ? -1 : 1));
-    });
+  const handleLike = async () => {
+    setIsLiked((prev) => !prev);
+    setCount((prev) => (isLiked ? prev - 1 : prev + 1));
+    await toggleLike({ tweetId, userId });
   };
 
   return (
     <div className="flex items-center gap-1 text-black cursor-pointer">
-      <button type="button" onClick={onClick}>
+      <button type="button" onClick={handleLike}>
         {isLiked ? (
           <SolidHeartIcon className="size-5 text-rose-500" />
         ) : (

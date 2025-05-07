@@ -4,15 +4,21 @@ import db from "@/lib/db";
 export async function toggleLike({
   tweetId,
   userId,
-  isLiked,
 }: {
   tweetId: number;
   userId: number;
-  isLiked: boolean;
 }) {
-  if (isLiked) {
-    await db.like.deleteMany({ where: { tweetId, userId } });
+  const existing = await db.like.findFirst({
+    where: { tweetId, userId },
+  });
+
+  if (existing) {
+    await db.like.delete({
+      where: { id: existing.id },
+    });
   } else {
-    await db.like.create({ data: { tweetId, userId } });
+    await db.like.create({
+      data: { tweetId, userId },
+    });
   }
 }
